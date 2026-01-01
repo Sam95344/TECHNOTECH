@@ -1,0 +1,13 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <style>
+                            @keyframes growBar { 0% { height: 10%; } 50% { height: 90%; } 100% { height: 50%; } }
+                            .animate-grow-1 { animation: growBar 2s infinite ease-in-out; }
+                            .animate-grow-2 { animation: growBar 2.5s infinite ease-in-out; }
+                            .animate-grow-3 { animation: growBar 1.8s infinite ease-in-out; }
+                        </style>
+                        <path d="M10 10 V90 H90" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/>
+                        <rect x="20" y="50" width="15" height="40" fill="#F87171" class="animate-grow-1" style="transform-origin: bottom; transform-box: fill-box;"/>
+                        <rect x="45" y="30" width="15" height="60" fill="#FCA5A5" class="animate-grow-2" style="transform-origin: bottom; transform-box: fill-box;"/>
+                        <rect x="70" y="60" width="15" height="30" fill="#FECACA" class="animate-grow-3" style="transform-origin: bottom; transform-box: fill-box;"/>
+                        <polyline points="20,50 45,30 70,60" fill="none" stroke="#EF4444" stroke-width="2" stroke-dasharray="4 4"/>
+                    </svg>

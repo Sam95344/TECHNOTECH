@@ -1,0 +1,19 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="gradMaint" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1"/>
+                                <stop offset="100%" style="stop-color:#d97706;stop-opacity:1"/>
+                            </linearGradient>
+                        </defs>
+                        <style>
+                            @keyframes twist { 0% { transform: rotate(-10deg); } 50% { transform: rotate(10deg); } 100% { transform: rotate(-10deg); } }
+                            .anim-twist { animation: twist 2s infinite ease-in-out; transform-origin: 50px 50px; transform-box: fill-box;}
+                        </style>
+                        <circle cx="50" cy="50" r="35" stroke="#475569" stroke-width="1" stroke-dasharray="5 5" fill="none"/>
+                        
+                        <g class="anim-twist">
+                            <path d="M65 35 L85 15 L80 10 L60 30" fill="url(#gradMaint)"/>
+                            <path d="M40 55 L35 60 A 10 10 0 0 1 20 45 L25 40 Z" fill="url(#gradMaint)"/>
+                            <line x1="25" y1="40" x2="60" y2="30" stroke="url(#gradMaint)" stroke-width="8" stroke-linecap="round"/>
+                        </g>
+                    </svg>

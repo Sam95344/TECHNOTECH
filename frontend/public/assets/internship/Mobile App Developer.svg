@@ -1,0 +1,10 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 80 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <style>
+                            @keyframes popUp { 0% { transform: scale(0); opacity: 0; } 50% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+                            .animate-pop { animation: popUp 2s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-box: fill-box; transform-origin: center;}
+                        </style>
+                        <rect x="10" y="10" width="60" height="100" rx="8" stroke="#FACC15" stroke-width="3" fill="#1E293B"/>
+                        <path d="M30 15 H50" stroke="#FACC15" stroke-width="2" stroke-linecap="round"/>
+                        <rect x="25" y="40" width="30" height="30" rx="6" fill="#FACC15" class="animate-pop"/>
+                        <rect x="20" y="80" width="40" height="4" rx="2" fill="#FEF08A" opacity="0.5"/>
+                    </svg>

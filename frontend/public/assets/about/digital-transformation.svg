@@ -1,0 +1,28 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="gradTrans" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#d946ef;stop-opacity:1"/>
+                                <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1"/>
+                            </linearGradient>
+                        </defs>
+                        <style>
+                            @keyframes morphShape { 
+                                0% { rx: 2; transform: rotate(0deg); } 
+                                50% { rx: 25; transform: rotate(180deg); } 
+                                100% { rx: 2; transform: rotate(360deg); } 
+                            }
+                            @keyframes particleFloat { 0% { opacity: 0; transform: translateY(0); } 50% { opacity: 1; } 100% { opacity: 0; transform: translateY(-15px); } }
+                            
+                            .anim-morph { animation: morphShape 6s infinite ease-in-out; transform-origin: center; transform-box: fill-box; }
+                            .anim-part { animation: particleFloat 2s infinite ease-out; }
+                        </style>
+                        
+                        <!-- Morphing Cube -->
+                        <rect x="25" y="25" width="50" height="50" rx="2" stroke="url(#gradTrans)" stroke-width="2" fill="none" class="anim-morph"/>
+                        <rect x="35" y="35" width="30" height="30" rx="2" stroke="url(#gradTrans)" stroke-width="1" fill="#d946ef" fill-opacity="0.2" class="anim-morph" style="animation-duration: 4s; animation-direction: reverse;"/>
+
+                        <!-- Digital Particles -->
+                        <circle cx="20" cy="80" r="2" fill="#d946ef" class="anim-part" style="animation-delay: 0s"/>
+                        <circle cx="80" cy="20" r="2" fill="#8b5cf6" class="anim-part" style="animation-delay: 0.5s"/>
+                        <circle cx="90" cy="80" r="2" fill="#d946ef" class="anim-part" style="animation-delay: 1s"/>
+                    </svg>

@@ -1,0 +1,17 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="gradCloud" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1"/>
+                                <stop offset="100%" style="stop-color:#0284c7;stop-opacity:1"/>
+                            </linearGradient>
+                        </defs>
+                        <style>
+                            @keyframes hoverCloud { 0% { transform: translateY(0); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0); } }
+                            @keyframes arrowUp { 0% { transform: translateY(5px); opacity:0; } 50% { transform: translateY(-2px); opacity:1; } 100% { transform: translateY(-8px); opacity:0; } }
+                            .anim-cloud { animation: hoverCloud 4s infinite ease-in-out; transform-box: fill-box; }
+                            .anim-up { animation: arrowUp 2s infinite ease-out; transform-origin: center; transform-box: fill-box; }
+                        </style>
+                        <path d="M25 60 C25 70 35 75 45 75 H70 C80 75 85 65 85 60 C85 50 80 45 75 45 C75 35 65 30 55 30 C45 30 35 35 35 45 C25 45 25 50 25 60 Z" fill="url(#gradCloud)" fill-opacity="0.2" stroke="url(#gradCloud)" stroke-width="2" class="anim-cloud"/>
+                         
+                        <path d="M50 65 V45 M50 45 L45 50 M50 45 L55 50" stroke="#bae6fd" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="anim-up"/>
+                    </svg>

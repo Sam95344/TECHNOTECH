@@ -1,0 +1,31 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="gradTeam" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1"/>
+                                <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:1"/>
+                            </linearGradient>
+                        </defs>
+                        <style>
+                            @keyframes nodePulse { 0% { r: 8; opacity: 0.8; } 50% { r: 10; opacity: 1; } 100% { r: 8; opacity: 0.8; } }
+                            @keyframes connectFlow { 0% { stroke-dashoffset: 20; } 100% { stroke-dashoffset: 0; } }
+                            .anim-node { animation: nodePulse 2s infinite ease-in-out; }
+                            .anim-link { animation: connectFlow 1s infinite linear; stroke-dasharray: 4; }
+                        </style>
+
+                        <!-- Connection Lines -->
+                        <line x1="50" y1="30" x2="25" y2="70" stroke="url(#gradTeam)" stroke-width="2" opacity="0.5"/>
+                        <line x1="50" y1="30" x2="75" y2="70" stroke="url(#gradTeam)" stroke-width="2" opacity="0.5"/>
+                        <line x1="25" y1="70" x2="75" y2="70" stroke="url(#gradTeam)" stroke-width="2" opacity="0.5"/>
+                        
+                        <!-- People Nodes -->
+                        <circle cx="50" cy="30" r="8" fill="#1e293b" stroke="url(#gradTeam)" stroke-width="2" class="anim-node"/>
+                        <path d="M40 30 Q50 40 60 30" stroke="none" fill="none"/> <!-- spacer -->
+                        
+                        <circle cx="25" cy="70" r="8" fill="#1e293b" stroke="url(#gradTeam)" stroke-width="2" class="anim-node" style="animation-delay: 0.3s"/>
+                        <circle cx="75" cy="70" r="8" fill="#1e293b" stroke="url(#gradTeam)" stroke-width="2" class="anim-node" style="animation-delay: 0.6s"/>
+
+                        <!-- Center Star/Badge -->
+                        <path d="M50 50 L52 55 L58 55 L53 59 L55 65 L50 61 L45 65 L47 59 L42 55 L48 55 Z" fill="#fcd34d">
+                             <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+                        </path>
+                    </svg>

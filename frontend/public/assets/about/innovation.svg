@@ -1,0 +1,29 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="gradIdea" x1="0%" y1="100%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#eab308;stop-opacity:1"/>
+                                <stop offset="100%" style="stop-color:#fef08a;stop-opacity:1"/>
+                            </linearGradient>
+                        </defs>
+                        <style>
+                            @keyframes glowPulse { 0% { opacity: 0.3; stroke-width: 1; } 50% { opacity: 1; stroke-width: 2; } 100% { opacity: 0.3; stroke-width: 1; } }
+                            @keyframes spark { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
+                            .anim-glow { animation: glowPulse 2s infinite ease-in-out; }
+                            .anim-spark { animation: spark 1.5s infinite ease-out; transform-origin: 50px 30px; }
+                        </style>
+
+                        <!-- Lightbulb Shape -->
+                        <path d="M35 35 C35 15 65 15 65 35 C65 45 55 50 55 60 H45 C45 50 35 45 35 35 Z" stroke="url(#gradIdea)" stroke-width="2" fill="none"/>
+                        <path d="M45 60 V65 H55 V60" stroke="url(#gradIdea)" stroke-width="2"/>
+                        <path d="M48 65 V68 H52 V65" stroke="url(#gradIdea)" stroke-width="2"/>
+
+                        <!-- Filament Brain/Circuit -->
+                        <path d="M42 35 H58 M50 28 V42" stroke="url(#gradIdea)" stroke-width="1.5" class="anim-glow"/>
+                        
+                        <!-- Spark/Rays -->
+                        <g class="anim-spark">
+                            <line x1="50" y1="15" x2="50" y2="5" stroke="#fef08a" stroke-width="2"/>
+                            <line x1="70" y1="20" x2="78" y2="12" stroke="#fef08a" stroke-width="2"/>
+                            <line x1="30" y1="20" x2="22" y2="12" stroke="#fef08a" stroke-width="2"/>
+                        </g>
+                    </svg>

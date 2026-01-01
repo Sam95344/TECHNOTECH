@@ -1,0 +1,30 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="gradTrain" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1"/>
+                                <stop offset="100%" style="stop-color:#22d3ee;stop-opacity:1"/>
+                            </linearGradient>
+                        </defs>
+                        <style>
+                            @keyframes capFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+                            @keyframes tasselSwing { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(10deg); } }
+                            .anim-cap { animation: capFloat 3s infinite ease-in-out; }
+                            .anim-tassel { animation: tasselSwing 3s infinite ease-in-out; transform-origin: 50px 35px; }
+                        </style>
+                        
+                        <!-- Graduation Cap -->
+                        <g class="anim-cap">
+                            <path d="M15 35 L50 15 L85 35 L50 55 Z" stroke="url(#gradTrain)" stroke-width="2" fill="#1e293b" fill-opacity="0.5"/>
+                            <path d="M85 35 V55" stroke="url(#gradTrain)" stroke-width="2"/>
+                            <!-- Tassel -->
+                            <path d="M50 35 V35" stroke="url(#gradTrain)" stroke-width="2" class="anim-tassel"/> 
+                            <path d="M50 35 C50 35 70 35 75 55" stroke="#fcd34d" stroke-width="2" fill="none" class="anim-tassel"/>
+                        </g>
+
+                        <!-- Monitor/Screen below -->
+                        <rect x="20" y="55" width="60" height="35" rx="4" stroke="url(#gradTrain)" stroke-width="2" fill="none"/>
+                        <path d="M30 72 L40 80 L30 88" stroke="url(#gradTrain)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="45" y1="85" x2="65" y2="85" stroke="url(#gradTrain)" stroke-width="2" stroke-linecap="round">
+                            <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+                        </line>
+                    </svg>
