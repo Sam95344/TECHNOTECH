@@ -51,7 +51,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   // Certificate handlers
   const fetchCertificates = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/certificates');
+      const response = await axios.get('https://technotech-o44t.onrender.com/api/certificates');
       setCertificates(response.data);
       setLoading(false);
     } catch (error) {
@@ -61,7 +61,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   const handleGenerateCertificate = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/certificates/generate', newCertificate);
+      await axios.post('https://technotech-o44t.onrender.com/api/certificates/generate', newCertificate);
       setNewCertificate({ studentName: '', course: '', completionDate: '', grade: '' });
       fetchCertificates();
     } catch (error) {}
@@ -79,7 +79,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   };
   const handleUpdateCert = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/api/certificates/${id}`, editCert);
+      await axios.put(`https://technotech-o44t.onrender.com/api/certificates/${id}`, editCert);
       setEditCertId(null);
       fetchCertificates();
     } catch (error) {}
@@ -87,7 +87,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   const handleDeleteCert = async (id) => {
     if (!window.confirm('Delete this certificate?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/certificates/${id}`);
+      await axios.delete(`https://technotech-o44t.onrender.com/api/certificates/${id}`);
       fetchCertificates();
     } catch (error) {}
   };
@@ -95,7 +95,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   // Service handlers
   const fetchServices = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/services');
+      const response = await axios.get('https://technotech-o44t.onrender.com/api/services');
       setServices(response.data);
     } catch (error) {}
   };
@@ -105,7 +105,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   const handleAddService = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/services', newService);
+      await axios.post('https://technotech-o44t.onrender.com/api/services', newService);
       setNewService({ title: '', description: '', icon: '', order: '' });
       fetchServices();
     } catch (error) {}
@@ -120,7 +120,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   };
   const handleUpdateService = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/api/services/${id}`, editService);
+      await axios.put(`https://technotech-o44t.onrender.com/api/services/${id}`, editService);
       setEditServiceId(null);
       fetchServices();
     } catch (error) {}
@@ -128,7 +128,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   const handleDeleteService = async (id) => {
     if (!window.confirm('Delete this service?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/services/${id}`);
+      await axios.delete(`https://technotech-o44t.onrender.com/api/services/${id}`);
       fetchServices();
     } catch (error) {}
   };
@@ -136,7 +136,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   // Internship handlers
   const fetchInternships = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/internships');
+      const response = await axios.get('https://technotech-o44t.onrender.com/api/internships');
       setInternships(response.data);
     } catch (error) {}
   };
@@ -146,7 +146,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   const handleAddInternship = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/internships', newInternship);
+      await axios.post('https://technotech-o44t.onrender.com/api/internships', newInternship);
       setNewInternship({ title: '', type: '', duration: '', stipend: '', description: '' });
       fetchInternships();
     } catch (error) {}
@@ -161,7 +161,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   };
   const handleUpdateIntern = async (id) => {
     try {
-      await axios.put(`http://localhost:5000/api/internships/${id}`, editIntern);
+      await axios.put(`https://technotech-o44t.onrender.com/api/internships/${id}`, editIntern);
       setEditInternId(null);
       fetchInternships();
     } catch (error) {}
@@ -169,7 +169,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   const handleDeleteIntern = async (id) => {
     if (!window.confirm('Delete this internship?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/internships/${id}`);
+      await axios.delete(`https://technotech-o44t.onrender.com/api/internships/${id}`);
       fetchInternships();
     } catch (error) {}
   };

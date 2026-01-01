@@ -18,7 +18,7 @@ const PublicVerification = ({ setActiveSection }) => {
     setCertificate(null);
 
     try {
-      const response = await axios.get(`http://localhost:5000/api/certificates/verify/${certificateNumber}`);
+      const response = await axios.get(`https://technotech-o44t.onrender.com/api/certificates/verify/${certificateNumber}`);
       setCertificate(response.data);
     } catch (err) {
       setError('Certificate not found or invalid.');
