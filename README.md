@@ -27,15 +27,7 @@ A modern glassmorphism-themed MERN stack website for TECHNOTECH NOVA SOLUTIONS, 
    npm run install-all
    ```
 3. **Configure environment**
-   - Create `backend/.env` with:
-     ```env
-     ADMIN_USERNAME=admin@technotech.com
-     ADMIN_PASSWORD=yourpassword
-     JWT_SECRET=your_jwt_secret
-     MONGODB_URI=mongodb://localhost:27017/technotech
-     MAIL_USER=your_email@gmail.com
-     MAIL_PASS=your_app_password
-     ```
+   
 4. **Start servers**
    ```bash
    npm run dev
