@@ -1,19 +1,18 @@
 const express = require('express');
 const Internship = require('../models/Internship');
-const { sendInternshipApplication } = require('../utils/mailer');
 
 const router = express.Router();
-// Apply for internship (send email)
+// Apply for internship (no email, just success response)
 router.post('/apply', async (req, res) => {
   try {
     const { name, domain, resume } = req.body;
     if (!name || !domain || !resume) {
       return res.status(400).json({ message: 'Name, domain, and resume are required.' });
     }
-    await sendInternshipApplication({ name, domain, resume });
-    res.json({ message: 'Application sent successfully!' });
+    // Email sending removed
+    res.json({ message: 'Application received successfully!' });
   } catch (error) {
-    res.status(500).json({ message: 'Failed to send application', error: error.message });
+    res.status(500).json({ message: 'Failed to process application', error: error.message });
   }
 });
 
