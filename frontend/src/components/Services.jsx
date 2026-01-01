@@ -9,7 +9,7 @@ const Services = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get('https://technotech-o44t.onrender.com/api/services');
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/services`);
         // Always show fallback services for demonstration
         setServices([
           {

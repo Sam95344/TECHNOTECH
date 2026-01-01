@@ -16,7 +16,7 @@ const Verification = () => {
     setCertificate(null);
 
     try {
-      const response = await axios.get(`https://technotech-o44t.onrender.com/api/certificates/${certificateNumber}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/certificates/${certificateNumber}`);
       setCertificate(response.data);
     } catch (err) {
       setError('Certificate not found or an error occurred.');
