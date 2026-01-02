@@ -42,7 +42,7 @@ const Navbar = ({ setActiveSection, activeSection }) => {
           <li><a href="#!" className={`nav-link ${activeSection === 'services' ? 'active' : ''}`} onClick={() => handleNavClick('services')}>Services</a></li>
           <li><a href="#!" className={`nav-link ${activeSection === 'internship' ? 'active' : ''}`} onClick={() => handleNavClick('internship')}>Internship</a></li>
           <li><a href="#!" className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`} onClick={() => handleNavClick('contact')}>Contact</a></li>
-          <li><a href="#!" className={`nav-link ${activeSection === 'verify' ? 'active' : ''}`} onClick={() => handleNavClick('verify')}>Verify Certificate</a></li>
+          <li><a href="https://technotech-solution.netlify.app/" className={`nav-link ${activeSection === 'verify' ? 'active' : ''}`} target="_blank" rel="noopener noreferrer">Verify Certificate</a></li>
         </ul>
       </div>
     </nav>
