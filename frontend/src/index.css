@@ -198,6 +198,50 @@ img { width: 100%; display: block; }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* --- GLASS CARD STYLES --- */
+.glass-card {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    width: 100%;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    overflow: hidden;
+    box-shadow: 0 50px 100px -30px rgba(0,0,0,0.8);
+    animation: cardFadeIn 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card-sidebar {
+    background: linear-gradient(165deg, rgba(30, 41, 59, 0.6) 0%, rgba(2, 6, 23, 0.9) 100%);
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.card-content {
+    padding: 60px;
+}
+
+/* Form grid for admin dashboard */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Result grid for verification */
+.result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
 /* --- BACKGROUND MESH --- */
 .bg-glow {
     position: fixed; width: 600px; height: 600px;
@@ -592,6 +636,8 @@ footer::before {
     .logo-icon { width: 40px; height: 40px; }
     .logo-text h1 { font-size: 1.5rem; }
     .logo-text span { font-size: 0.7rem; }
+    .form-grid { grid-template-columns: 1fr; }
+    .result-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {

@@ -70,23 +70,11 @@ const PublicVerification = () => {
         <div style={{ position: "absolute", width: "600px", height: "600px", background: "rgba(139, 92, 246, 0.25)", filter: "blur(120px)", borderRadius: "50%", animation: "move 25s infinite alternate", opacity: 0.25, bottom: "-150px", right: "-150px", animationDelay: "-12s" }}></div>
       </div>
 
-      <header style={{ padding: "40px 0", display: "flex", justifyContent: "center" }}>
-        <a href="#" style={{ display: "flex", alignItems: "center", gap: "15px", textDecoration: "none", cursor: "pointer" }}>
-          <div style={{ width: "50px", height: "50px", background: "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)", borderRadius: "14px", display: "flex", alignItems: "center", justifyContent: "center", color: "white", boxShadow: "0 10px 25px rgba(59, 130, 246, 0.4)", transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)", transform: "rotate(-5deg)" }}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="28" height="28"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <div>
-            <h1 style={{ fontFamily: "'Outfit', sans-serif", fontSize: "2rem", fontWeight: 800, letterSpacing: "-1px", color: "white", lineHeight: 1 }}>TECHNOTECH</h1>
-            <span style={{ fontSize: "0.8rem", color: "#8b5cf6", fontWeight: 700, letterSpacing: "4px", textTransform: "uppercase", display: "block", marginTop: "5px" }}>NOVA SOLUTIONS</span>
-          </div>
-        </a>
-      </header>
-
-      <main style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "20px 0 60px" }}>
+      <main style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "120px 0 60px" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 20px", width: "100%" }}>
           {currentView === 'verify' && (
-            <div style={{ background: "rgba(15, 23, 42, 0.75)", backdropFilter: "blur(30px)", WebkitBackdropFilter: "blur(30px)", border: "1px solid rgba(255, 255, 255, 0.1)", borderRadius: "40px", width: "100%", maxWidth: "1000px", display: "grid", gridTemplateColumns: "380px 1fr", overflow: "hidden", boxShadow: "0 50px 100px -30px rgba(0,0,0,0.8)", animation: "cardFadeIn 1s cubic-bezier(0.2, 0.8, 0.2, 1)" }}>
-              <div style={{ background: "linear-gradient(165deg, rgba(30, 41, 59, 0.6) 0%, rgba(2, 6, 23, 0.9) 100%)", padding: "60px 50px", display: "flex", flexDirection: "column", justifyContent: "center", borderRight: "1px solid rgba(255, 255, 255, 0.1)", position: "relative" }}>
+            <div className="glass-card">
+              <div className="card-sidebar">
                 <h2 onDoubleClick={showAdminLogin} style={{ fontFamily: "'Outfit', sans-serif", fontSize: "2.6rem", lineHeight: 1.1, marginBottom: "25px", background: "linear-gradient(to bottom, #fff, #94a3b8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", cursor: "default", userSelect: "none" }}>Secure<br/>Verification.</h2>
                 <p style={{ color: "#94a3b8", fontSize: "1rem", lineHeight: 1.7 }}>Validate achievements instantly through our secure digital ledger system.</p>
                 <div style={{ marginTop: "45px", display: "flex", gap: "20px" }}>
@@ -95,7 +83,7 @@ const PublicVerification = () => {
                   <i className="fas fa-check-double" style={{ color: "#8b5cf6", fontSize: "1.6rem" }}></i>
                 </div>
               </div>
-              <div style={{ padding: "60px" }}>
+              <div className="card-content">
                 <form onSubmit={verifyCertificate}>
                   <div style={{ marginBottom: "30px" }}>
                     <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 800, color: "#60a5fa", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "12px" }}>Certificate Number</label>
@@ -121,7 +109,7 @@ const PublicVerification = () => {
                           <i className="fas fa-check-circle" style={{ color: "#10b981", fontSize: "2rem" }}></i>
                           <h4 style={{ color: "#10b981", fontFamily: "'Outfit', sans-serif" }}>VERIFIED</h4>
                         </div>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "25px" }}>
+                        <div className="result-grid">
                           <div><label style={{ display: "block", fontSize: "0.75rem", color: "#94a3b8", textTransform: "uppercase", marginBottom: "6px", fontWeight: 700, letterSpacing: "1px" }}>Name</label><p style={{ fontSize: "1rem", fontWeight: 600, color: "white" }}>{verifyResult.name}</p></div>
                           <div><label style={{ display: "block", fontSize: "0.75rem", color: "#94a3b8", textTransform: "uppercase", marginBottom: "6px", fontWeight: 700, letterSpacing: "1px" }}>Certificate Number</label><p style={{ fontSize: "1rem", fontWeight: 600, color: "white", fontFamily: "'JetBrains Mono'" }}>{verifyResult.id}</p></div>
                           <div><label style={{ display: "block", fontSize: "0.75rem", color: "#94a3b8", textTransform: "uppercase", marginBottom: "6px", fontWeight: 700, letterSpacing: "1px" }}>Domain</label><p style={{ fontSize: "1rem", fontWeight: 600, color: "white" }}>{verifyResult.course}</p></div>
@@ -136,12 +124,12 @@ const PublicVerification = () => {
           )}
 
           {currentView === 'adminLogin' && (
-            <div style={{ background: "rgba(15, 23, 42, 0.75)", backdropFilter: "blur(30px)", WebkitBackdropFilter: "blur(30px)", border: "1px solid rgba(255, 255, 255, 0.1)", borderRadius: "40px", width: "100%", maxWidth: "1000px", display: "grid", gridTemplateColumns: "380px 1fr", overflow: "hidden", boxShadow: "0 50px 100px -30px rgba(0,0,0,0.8)", animation: "cardFadeIn 1s cubic-bezier(0.2, 0.8, 0.2, 1)" }}>
-              <div style={{ background: "linear-gradient(165deg, #450a0a 0%, #020617 100%)", padding: "60px 50px", display: "flex", flexDirection: "column", justifyContent: "center", borderRight: "1px solid rgba(255, 255, 255, 0.1)" }}>
+            <div className="glass-card">
+              <div className="card-sidebar" style={{ background: "linear-gradient(165deg, #450a0a 0%, #020617 100%)" }}>
                 <h2>Admin<br/>Gateway.</h2>
                 <p>Protected area for Nova Solutions management.</p>
               </div>
-              <div style={{ padding: "60px" }}>
+              <div className="card-content">
                 <form onSubmit={checkAdminLogin}>
                   <div style={{ marginBottom: "30px" }}>
                     <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 800, color: "#60a5fa", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "12px" }}>Administrator ID</label>
@@ -161,14 +149,14 @@ const PublicVerification = () => {
           )}
 
           {currentView === 'adminDashboard' && (
-            <div style={{ background: "rgba(15, 23, 42, 0.75)", backdropFilter: "blur(30px)", WebkitBackdropFilter: "blur(30px)", border: "1px solid rgba(255, 255, 255, 0.1)", borderRadius: "40px", width: "100%", maxWidth: "1000px", display: "grid", gridTemplateColumns: "380px 1fr", overflow: "hidden", boxShadow: "0 50px 100px -30px rgba(0,0,0,0.8)", animation: "cardFadeIn 1s cubic-bezier(0.2, 0.8, 0.2, 1)" }}>
-              <div style={{ background: "linear-gradient(165deg, #1e1b4b 0%, #020617 100%)", padding: "60px 50px", display: "flex", flexDirection: "column", justifyContent: "center", borderRight: "1px solid rgba(255, 255, 255, 0.1)" }}>
+            <div className="glass-card">
+              <div className="card-sidebar" style={{ background: "linear-gradient(165deg, #1e1b4b 0%, #020617 100%)" }}>
                 <h2>Record<br/>Issuer.</h2>
                 <p>Register new credentials to the digital database.</p>
               </div>
-              <div style={{ padding: "60px" }}>
+              <div className="card-content">
                 <form onSubmit={generateCertificate}>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+                  <div className="form-grid">
                     <div style={{ marginBottom: "30px" }}>
                       <label style={{ display: "block", fontSize: "0.75rem", fontWeight: 800, color: "#60a5fa", textTransform: "uppercase", letterSpacing: "2px", marginBottom: "12px" }}>Certificate Number</label>
                       <input type="text" value={genId} onChange={(e) => setGenId(e.target.value)} style={{ width: "100%", background: "rgba(255, 255, 255, 0.04)", border: "2px solid rgba(255, 255, 255, 0.08)", padding: "20px 25px", borderRadius: "20px", color: "white", fontFamily: "'JetBrains Mono', monospace", fontSize: "1.1rem", transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)", outline: "none" }} placeholder="NS-101" required />
