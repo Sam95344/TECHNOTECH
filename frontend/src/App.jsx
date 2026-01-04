@@ -62,7 +62,7 @@ function App() {
       case 'contact':
         return <Contact />;
       case 'verify':
-        return <PublicVerification setActiveSection={setActiveSection} />;
+        return <PublicVerification />;
       case 'admin':
         return isAuthenticated ? (
           <AdminDashboard setActiveSection={setActiveSection} handleLogout={handleLogout} />

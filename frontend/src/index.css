@@ -556,3 +556,61 @@ footer::before {
     min-height: 100vh;
     position: relative;
 }
+
+/* --- Verification Page Styles --- */
+@keyframes move {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(150px, 150px) scale(1.2); }
+}
+@keyframes cardFadeIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes resultShow {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* --- Verification Page Media Queries --- */
+@media (max-width: 950px) {
+    .glass-card { grid-template-columns: 1fr !important; }
+    .card-sidebar { padding: 50px 40px !important; border-right: none !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important; }
+    .card-content { padding: 40px 30px !important; }
+}
+
+@media (max-width: 768px) {
+    .contact-box { padding: 20px; }
+    .contact-sidebar, .contact-main { padding: 20px; }
+    .contact-sidebar h3, .contact-main h3 { font-size: 1.5rem; }
+    .contact-info-item { flex-direction: column; text-align: center; gap: 10px; }
+    .form-group-row { grid-template-columns: 1fr; gap: 15px; }
+    .glass-card { margin: 0 10px; max-width: none !important; }
+    .card-sidebar, .card-content { padding: 30px 20px !important; }
+    .premium-input { padding: 15px 20px; font-size: 1rem; }
+    .action-btn { padding: 18px; font-size: 1rem; }
+    .logo { gap: 10px; }
+    .logo-icon { width: 40px; height: 40px; }
+    .logo-text h1 { font-size: 1.5rem; }
+    .logo-text span { font-size: 0.7rem; }
+}
+
+@media (max-width: 480px) {
+    .contact-box { padding: 15px; gap: 20px; }
+    .contact-sidebar, .contact-main { padding: 15px; }
+    .contact-sidebar h3, .contact-main h3 { font-size: 1.3rem; margin-bottom: 20px; }
+    .contact-info-item { margin-bottom: 20px; }
+    .contact-info-icon { width: 40px; height: 40px; font-size: 1.2rem; }
+    .contact-info-label { font-size: 0.7rem; }
+    .contact-info-text span:last-child { font-size: 0.9rem; }
+    .form-input { padding: 12px 15px; font-size: 0.9rem; }
+    .btn { padding: 12px 20px; font-size: 0.9rem; }
+    .glass-card { margin: 0 5px; }
+    .card-sidebar h2 { font-size: 2rem; }
+    .card-content { padding: 20px 15px !important; }
+    .premium-input { padding: 12px 15px; font-size: 0.9rem; }
+    .action-btn { padding: 15px; font-size: 0.9rem; }
+    .navbar { padding: 30px 0; }
+    .logo-text h1 { font-size: 1.3rem; }
+    .logo-text span { font-size: 0.6rem; }
+    .footer { padding: 30px 0; font-size: 0.8rem; }
+}

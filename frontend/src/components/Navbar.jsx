@@ -10,13 +10,14 @@ const Navbar = ({ setActiveSection, activeSection }) => {
   const handleNavClick = (section) => {
     setActiveSection(section);
     setIsMenuOpen(false); // Close mobile menu
+    window.location.hash = `#${section}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <nav className="navbar">
       <div className="container nav-container">
-        <a href="#!" className="logo" onClick={() => handleNavClick('home')}>
+        <a href="#!" className="logo" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}>
           <div className="logo-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 2L2 7l10 5 10-5-10-5z"/>
@@ -37,12 +38,12 @@ const Navbar = ({ setActiveSection, activeSection }) => {
           </svg>
         </div>
         <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-          <li><a href="#!" className={`nav-link ${activeSection === 'home' ? 'active' : ''}`} onClick={() => handleNavClick('home')}>Home</a></li>
-          <li><a href="#!" className={`nav-link ${activeSection === 'about' ? 'active' : ''}`} onClick={() => handleNavClick('about')}>About</a></li>
-          <li><a href="#!" className={`nav-link ${activeSection === 'services' ? 'active' : ''}`} onClick={() => handleNavClick('services')}>Services</a></li>
-          <li><a href="#!" className={`nav-link ${activeSection === 'internship' ? 'active' : ''}`} onClick={() => handleNavClick('internship')}>Internship</a></li>
-          <li><a href="#!" className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`} onClick={() => handleNavClick('contact')}>Contact</a></li>
-          <li><a href="https://technotech-solution.netlify.app/" className={`nav-link ${activeSection === 'verify' ? 'active' : ''}`} target="_blank" rel="noopener noreferrer">Verify Certificate</a></li>
+          <li><a href="#!" className={`nav-link ${activeSection === 'home' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}>Home</a></li>
+          <li><a href="#!" className={`nav-link ${activeSection === 'about' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); handleNavClick('about'); }}>About</a></li>
+          <li><a href="#!" className={`nav-link ${activeSection === 'services' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); handleNavClick('services'); }}>Services</a></li>
+          <li><a href="#!" className={`nav-link ${activeSection === 'internship' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); handleNavClick('internship'); }}>Internship</a></li>
+          <li><a href="#!" className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); handleNavClick('contact'); }}>Contact</a></li>
+          <li><a href="#!" className={`nav-link ${activeSection === 'verify' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); handleNavClick('verify'); }}>Verify Certificate</a></li>
         </ul>
       </div>
     </nav>
