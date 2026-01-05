@@ -9,11 +9,7 @@ const Footer = () => {
           <div className="footer-section logo-centered">
             <div className="logo">
               <div className="logo-icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                  <path d="M2 17l10 5 10-5"/>
-                  <path d="M2 12l10 5 10-5"/>
-                </svg>
+                <img src="/assets/TECHNOTECH_LOGO-removebg.png" alt="TECHNOTECH Logo" width="60" height="60" />
               </div>
               <div className="logo-text">
                 <span className="logo-main">TECHNOTECH</span>
