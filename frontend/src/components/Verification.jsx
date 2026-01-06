@@ -15,16 +15,18 @@ const Verification = () => {
     setError('');
     setCertificate(null);
 
+    console.log('Verifying certificate:', certificateNumber);
     try {
       const certificate = await getCertificateByNumber(certificateNumber);
+      console.log('Certificate found:', certificate);
       if (!certificate) {
         setError('Certificate not found or an error occurred.');
       } else {
         setCertificate(certificate);
       }
     } catch (err) {
+      console.error('Verification error:', err);
       setError('Certificate not found or an error occurred.');
-      console.error(err);
     } finally {
       setLoading(false);
     }

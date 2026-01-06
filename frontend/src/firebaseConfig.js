@@ -16,6 +16,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+console.log('Firebase initialized successfully');
+console.log('Firestore db:', db);
+
 // Fetch internship document by ID from collection `internships`
 export async function getInternshipById(id) {
   if (!id) return null;
@@ -84,11 +87,15 @@ export async function updateInternshipById(id, data) {
 // Fetch certificate document by certificateNumber from collection `certificates`
 export async function getCertificateByNumber(certificateNumber) {
   if (!certificateNumber) return null;
+  console.log('Fetching certificate from Firebase:', certificateNumber);
   try {
     const ref = doc(db, 'certificates', String(certificateNumber));
     const snap = await getDoc(ref);
+    console.log('Firebase snapshot exists:', snap.exists());
     if (!snap.exists()) return null;
-    return { certificateNumber: snap.id, ...snap.data() };
+    const data = { certificateNumber: snap.id, ...snap.data() };
+    console.log('Certificate data:', data);
+    return data;
   } catch (err) {
     console.error('getCertificateByNumber error', err);
     throw err;
@@ -98,9 +105,11 @@ export async function getCertificateByNumber(certificateNumber) {
 // Save or overwrite a certificate record by certificateNumber (useful for admin or testing)
 export async function saveCertificateByNumber(certificateNumber, data) {
   if (!certificateNumber) throw new Error('certificateNumber required');
+  console.log('Saving certificate to Firebase:', certificateNumber, data);
   try {
     const ref = doc(db, 'certificates', String(certificateNumber));
     await setDoc(ref, data, { merge: true });
+    console.log('Certificate saved successfully');
     return true;
   } catch (err) {
     console.error('saveCertificateByNumber error', err);

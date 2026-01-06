@@ -51,10 +51,13 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   // Certificate handlers
   const fetchCertificates = async () => {
     try {
+      console.log('Fetching all certificates from Firebase...');
       const certificates = await getAllCertificates();
+      console.log('Fetched certificates:', certificates);
       setCertificates(certificates);
       setLoading(false);
     } catch (error) {
+      console.error('Error fetching certificates:', error);
       setLoading(false);
     }
   };
@@ -62,10 +65,14 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
     e.preventDefault();
     try {
       const certificateNumber = 'CERT' + Date.now() + Math.random().toString(36).substr(2, 5).toUpperCase();
+      console.log('Generated certificate number:', certificateNumber);
+      console.log('Certificate data:', { ...newCertificate, issuedBy: 'TechNotech' });
       await saveCertificateByNumber(certificateNumber, { ...newCertificate, issuedBy: 'TechNotech' });
       setNewCertificate({ studentName: '', course: '', completionDate: '', grade: '' });
       fetchCertificates();
-    } catch (error) {}
+    } catch (error) {
+      console.error('Error generating certificate:', error);
+    }
   };
   const handleInputChange = (e) => {
     setNewCertificate({ ...newCertificate, [e.target.name]: e.target.value });
