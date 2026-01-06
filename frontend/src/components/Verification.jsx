@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import axios from 'axios';
+import { getCertificateByNumber } from '../firebaseConfig';
 import CodeCompiler from './CodeCompiler';
 
 const Verification = () => {
@@ -16,8 +16,12 @@ const Verification = () => {
     setCertificate(null);
 
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/certificates/${certificateNumber}`);
-      setCertificate(response.data);
+      const certificate = await getCertificateByNumber(certificateNumber);
+      if (!certificate) {
+        setError('Certificate not found or an error occurred.');
+      } else {
+        setCertificate(certificate);
+      }
     } catch (err) {
       setError('Certificate not found or an error occurred.');
       console.error(err);

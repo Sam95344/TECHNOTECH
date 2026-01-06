@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { getAllCertificates, saveCertificateByNumber, updateCertificateByNumber, deleteCertificateByNumber } from '../firebaseConfig';
 
 const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   // Certificate state
@@ -51,8 +51,8 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   // Certificate handlers
   const fetchCertificates = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/certificates`);
-      setCertificates(response.data);
+      const certificates = await getAllCertificates();
+      setCertificates(certificates);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -61,7 +61,8 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   const handleGenerateCertificate = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/api/certificates/generate`, newCertificate);
+      const certificateNumber = 'CERT' + Date.now() + Math.random().toString(36).substr(2, 5).toUpperCase();
+      await saveCertificateByNumber(certificateNumber, { ...newCertificate, issuedBy: 'TechNotech' });
       setNewCertificate({ studentName: '', course: '', completionDate: '', grade: '' });
       fetchCertificates();
     } catch (error) {}
@@ -71,23 +72,23 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   };
   // Edit certificate
   const handleEditCert = (cert) => {
-    setEditCertId(cert._id);
+    setEditCertId(cert.certificateNumber);
     setEditCert({ ...cert });
   };
   const handleEditCertChange = (e) => {
     setEditCert({ ...editCert, [e.target.name]: e.target.value });
   };
-  const handleUpdateCert = async (id) => {
+  const handleUpdateCert = async (certificateNumber) => {
     try {
-      await axios.put(`${process.env.REACT_APP_API_URL}/api/certificates/${id}`, editCert);
+      await updateCertificateByNumber(certificateNumber, editCert);
       setEditCertId(null);
       fetchCertificates();
     } catch (error) {}
   };
-  const handleDeleteCert = async (id) => {
+  const handleDeleteCert = async (certificateNumber) => {
     if (!window.confirm('Delete this certificate?')) return;
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/certificates/${id}`);
+      await deleteCertificateByNumber(certificateNumber);
       fetchCertificates();
     } catch (error) {}
   };
@@ -233,8 +234,8 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
                 ) : (
                   <div style={{ display: 'grid', gap: '20px' }}>
                     {certificates.map((cert) => (
-                      <div key={cert._id} className="modern-card" style={{ padding: '20px', background: 'rgba(59,130,246,0.08)', position: 'relative' }}>
-                        {editCertId === cert._id ? (
+                      <div key={cert.certificateNumber} className="modern-card" style={{ padding: '20px', background: 'rgba(59,130,246,0.08)', position: 'relative' }}>
+                        {editCertId === cert.certificateNumber ? (
                           <>
                             <input type="text" name="studentName" value={editCert.studentName} onChange={handleEditCertChange} style={{ width: '100%', marginBottom: 6 }} />
                             <input type="text" name="course" value={editCert.course} onChange={handleEditCertChange} style={{ width: '100%', marginBottom: 6 }} />
@@ -248,7 +249,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
                               <option value="C">C</option>
                               <option value="Pass">Pass</option>
                             </select>
-                            <button className="btn btn-primary" style={{ marginRight: 8 }} onClick={() => handleUpdateCert(cert._id)}>Save</button>
+                            <button className="btn btn-primary" style={{ marginRight: 8 }} onClick={() => handleUpdateCert(cert.certificateNumber)}>Save</button>
                             <button className="btn btn-outline" onClick={() => setEditCertId(null)}>Cancel</button>
                           </>
                         ) : (
@@ -259,7 +260,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
                             <p><strong>Completion Date:</strong> {new Date(cert.completionDate).toLocaleDateString()}</p>
                             <p><strong>Grade:</strong> {cert.grade}</p>
                             <button className="btn btn-outline" style={{ marginRight: 8 }} onClick={() => handleEditCert(cert)}>Edit</button>
-                            <button className="btn btn-secondary" onClick={() => handleDeleteCert(cert._id)}>Delete</button>
+                            <button className="btn btn-secondary" onClick={() => handleDeleteCert(cert.certificateNumber)}>Delete</button>
                           </>
                         )}
                       </div>

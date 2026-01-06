@@ -632,8 +632,8 @@ footer::before {
     .card-sidebar, .card-content { padding: 30px 20px !important; }
     .premium-input { padding: 15px 20px; font-size: 1rem; }
     .action-btn { padding: 18px; font-size: 1rem; }
-    .logo { gap: 20px; }
-    .logo-icon { width: 80px; height: 80px; }
+    .logo { gap: 10px; }
+    .logo-icon { width: 50px; height: 50px; }
     .logo-text h1 { font-size: 1.5rem; }
     .logo-text span { font-size: 0.7rem; }
     .form-grid { grid-template-columns: 2fr; }

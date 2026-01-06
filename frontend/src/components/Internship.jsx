@@ -1,11 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { getInternshipById } from '../firebaseConfig';
 
 const Internship = () => {
   const [internships, setInternships] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [queryId, setQueryId] = useState('');
+  const [queried, setQueried] = useState(null);
 
   useEffect(() => {
     const fetchInternships = async () => {
@@ -119,6 +122,50 @@ const Internship = () => {
           <h2 className="hero-float" style={{ animationDelay: '0.2s' }}>Internship Opportunities</h2>
           <p style={{ color: 'var(--text-muted)', animationDelay: '0.3s' }} className="hero-float">Kickstart Your Tech Career With Us</p>
         </div>
+        {/* Quick fetch by ID (client-side, using Firestore) */}
+        <div style={{ maxWidth: 520, margin: '0 auto 28px', display: 'flex', gap: 8 }}>
+          <input
+            value={queryId}
+            onChange={(e) => setQueryId(e.target.value)}
+            placeholder="Enter internship ID (e.g. 1)"
+            style={{ flex: 1, padding: '10px 12px' }}
+          />
+          <button
+            className="btn btn-primary"
+            onClick={async () => {
+              if (!queryId) return;
+              setError(null);
+              try {
+                const doc = await getInternshipById(queryId);
+                if (!doc) {
+                  setQueried({ notFound: true });
+                } else {
+                  setQueried(doc);
+                }
+              } catch (err) {
+                setError('Failed to fetch');
+                console.error(err);
+              }
+            }}
+            style={{ padding: '10px 16px' }}
+          >
+            Fetch
+          </button>
+        </div>
+
+        {queried && (
+          <div style={{ maxWidth: 900, margin: '0 auto 24px', padding: 18, borderRadius: 8, background: '#fff' }}>
+            {queried.notFound ? (
+              <div style={{ textAlign: 'center', color: '#666' }}>No internship found for ID: {queryId}</div>
+            ) : (
+              <div>
+                <h3 style={{ marginBottom: 6 }}>{queried.title || 'Untitled Internship'}</h3>
+                <p style={{ marginBottom: 8 }}>{queried.description || 'No description available.'}</p>
+                <a href={queried.applyLink || 'https://docs.google.com/forms/d/e/1FAIpQLSd95niQu7id1_3vfiLQgGSIYzmfNvs4qhKqjJNOiGuy3lwHGA/viewform?usp=dialog'} target="_blank" rel="noreferrer" className="btn btn-primary">Apply</a>
+              </div>
+            )}
+          </div>
+        )}
         <div className="grid-cards">
           {internships.map((internship, idx) => {
             // Map internship title to SVG image
