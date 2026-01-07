@@ -19,9 +19,10 @@ router.get('/verify/:certificateNumber', async (req, res) => {
 // Generate certificate (admin)
 router.post('/generate', async (req, res) => {
   try {
-    const { studentName, course, completionDate, grade, duration } = req.body;
-    const certificateNumber = 'CERT' + Date.now() + Math.random().toString(36).substr(2, 5).toUpperCase();
-    
+    const { certificateNumber, studentName, course, completionDate, grade, duration } = req.body;
+    if (!certificateNumber) {
+      return res.status(400).json({ message: 'Certificate number is required.' });
+    }
     const certificate = new Certificate({
       certificateNumber,
       studentName,
