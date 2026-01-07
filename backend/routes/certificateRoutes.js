@@ -20,8 +20,8 @@ router.get('/verify/:certificateNumber', async (req, res) => {
 router.post('/generate', async (req, res) => {
   try {
     const { certificateNumber, studentName, course, completionDate, grade, duration } = req.body;
-    if (!certificateNumber) {
-      return res.status(400).json({ message: 'Certificate number is required.' });
+    if (!certificateNumber || !studentName || !course || !completionDate) {
+      return res.status(400).json({ message: 'Certificate number, student name, course, and completion date are required.' });
     }
     const certificate = new Certificate({
       certificateNumber,
@@ -35,6 +35,9 @@ router.post('/generate', async (req, res) => {
     const savedCertificate = await certificate.save();
     res.status(201).json(savedCertificate);
   } catch (error) {
+    if (error.code === 11000) {
+      return res.status(400).json({ message: 'Certificate number already exists. Please use a unique number.' });
+    }
     res.status(400).json({ message: error.message });
   }
 });
