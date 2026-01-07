@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import { getCertificateByNumber } from '../firebaseConfig';
 import CodeCompiler from './CodeCompiler';
 
 const Verification = () => {
@@ -17,13 +16,14 @@ const Verification = () => {
 
     console.log('Verifying certificate:', certificateNumber);
     try {
-      const certificate = await getCertificateByNumber(certificateNumber);
-      console.log('Certificate found:', certificate);
-      if (!certificate) {
-        setError('Certificate not found or an error occurred.');
-      } else {
-        setCertificate(certificate);
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || '/api';
+      const response = await fetch(`${backendUrl}/certificates/verify/${certificateNumber}`);
+      if (!response.ok) {
+        throw new Error('Certificate not found');
       }
+      const certificate = await response.json();
+      console.log('Certificate found:', certificate);
+      setCertificate(certificate);
     } catch (err) {
       console.error('Verification error:', err);
       setError('Certificate not found or an error occurred.');

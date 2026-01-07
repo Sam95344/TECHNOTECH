@@ -22,6 +22,10 @@ const certificateSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  duration: {
+    type: String,
+    default: 'N/A'
+  },
   issuedBy: {
     type: String,
     default: 'TechNotech Solution Pvt. Ltd.'

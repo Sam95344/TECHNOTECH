@@ -11,14 +11,6 @@ const PublicVerification = () => {
   const [genCourse, setGenCourse] = useState('');
   const [genDuration, setGenDuration] = useState('');
   const [verifyResult, setVerifyResult] = useState(null);
-  const [certs, setCerts] = useState({});
-
-  useEffect(() => {
-    const stored = localStorage.getItem('technotech_certs');
-    if (stored) {
-      setCerts(JSON.parse(stored));
-    }
-  }, []);
 
   const showAdminLogin = () => setCurrentView('adminLogin');
   const showVerifyPanel = () => {
@@ -26,41 +18,88 @@ const PublicVerification = () => {
     setVerifyResult(null);
   };
 
-  const checkAdminLogin = (e) => {
+  const checkAdminLogin = async (e) => {
     e.preventDefault();
-    const _u = "aWFtc2hhbXNoYWQ4MDg0QGdtYWlsLmNvbQ==";
-    const _p = "U2hhbXNoYWRAMjAwNQ==";
-    if (btoa(adminEmail) === _u && btoa(adminPass) === _p) {
-      setCurrentView('adminDashboard');
-    } else {
-      alert('Access Refused');
+    console.log('Attempting login with:', adminEmail, adminPass);
+    try {
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || '/api';
+      console.log('Backend URL:', backendUrl);
+      const response = await fetch(`${backendUrl}/admin/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: adminEmail.trim(),
+          password: adminPass.trim()
+        }),
+      });
+      const data = await response.json();
+      console.log('Response:', response.status, data);
+      if (response.ok) {
+        setCurrentView('adminDashboard');
+      } else {
+        alert(data.msg || 'Login failed');
+      }
+    } catch (error) {
+      console.log('Error:', error);
+      alert('Error logging in');
     }
   };
 
-  const generateCertificate = (e) => {
+  const generateCertificate = async (e) => {
     e.preventDefault();
-    const newCerts = { ...certs };
-    newCerts[genId] = {
-      id: genId,
-      name: genName,
-      course: genCourse,
-      date: genDate,
-      duration: genDuration
-    };
-    setCerts(newCerts);
-    localStorage.setItem('technotech_certs', JSON.stringify(newCerts));
-    alert('Record Published.');
-    setGenId('');
-    setGenDate('');
-    setGenName('');
-    setGenCourse('');
-    setGenDuration('');
+    try {
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || '/api';
+      const response = await fetch(`${backendUrl}/certificates/generate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          studentName: genName,
+          course: genCourse,
+          completionDate: genDate,
+          grade: 'A+', // Default grade
+          duration: genDuration
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to generate certificate');
+      }
+      const certificate = await response.json();
+      alert(`Certificate generated with number: ${certificate.certificateNumber}`);
+      setGenId('');
+      setGenDate('');
+      setGenName('');
+      setGenCourse('');
+      setGenDuration('');
+    } catch (error) {
+      alert('Error generating certificate');
+    }
   };
 
-  const verifyCertificate = (e) => {
+  const verifyCertificate = async (e) => {
     e.preventDefault();
-    const record = certs[certInput.trim()];
-    setVerifyResult(record || 'not found');
+    setVerifyResult(null);
+    try {
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || '/api';
+      const response = await fetch(`${backendUrl}/certificates/verify/${certInput.trim()}`);
+      if (!response.ok) {
+        setVerifyResult('not found');
+        return;
+      }
+      const certificate = await response.json();
+      setVerifyResult({
+        id: certificate.certificateNumber,
+        name: certificate.studentName,
+        course: certificate.course,
+        date: new Date(certificate.completionDate).toLocaleDateString(),
+        duration: certificate.duration || 'N/A'
+      });
+    } catch (error) {
+      setVerifyResult('not found');
+    }
   };
 
   return (
