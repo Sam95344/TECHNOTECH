@@ -35,15 +35,46 @@ const Contact = () => {
         </div>
         <div className="contact-main hero-fade-in" style={{ animationDelay: '0.3s' }}>
           <h3 className="hero-float" style={{ animationDelay: '0.35s' }}>Send a Message</h3>
-          <form id="contactForm" action="https://formsubmit.co/careerstechnotech@gmail.com" method="POST" target="_blank">
-            <input type="hidden" name="_subject" value="New Customer Inquiry" />
-            <input type="hidden" name="_captcha" value="false" />
+          <form id="contactForm" onSubmit={async (e) => {
+            e.preventDefault();
+          }}>
             <div className="form-group-row">
-                <input type="text" name="Name" className="form-input hero-float" style={{ animationDelay: '0.4s' }} placeholder="Your Name" required />
-                <input type="email" name="Email" className="form-input hero-float" style={{ animationDelay: '0.45s' }} placeholder="Email Address" required />
+                <input type="text" name="name" id="contact-name" className="form-input hero-float" style={{ animationDelay: '0.4s' }} placeholder="Your Name" required />
+                <input type="email" name="email" id="contact-email" className="form-input hero-float" style={{ animationDelay: '0.45s' }} placeholder="Email Address" required />
             </div>
-            <textarea name="Message" rows="5" className="form-input hero-float" style={{ animationDelay: '0.5s' }} placeholder="Your Message" required></textarea>
-            <button type="submit" className="btn btn-primary hero-fade-btn" style={{ width: '100%', animationDelay: '0.55s' }}>Send Message</button>
+            <textarea name="message" id="contact-message" rows="5" className="form-input hero-float" style={{ animationDelay: '0.5s' }} placeholder="Your Message" required></textarea>
+            <button type="button" id="contact-send" className="btn btn-primary hero-fade-btn" style={{ width: '100%', animationDelay: '0.55s' }} onClick={async () => {
+              const btn = document.getElementById('contact-send');
+              const name = document.getElementById('contact-name').value.trim();
+              const email = document.getElementById('contact-email').value.trim();
+              const message = document.getElementById('contact-message').value.trim();
+              if (!name || !email || !message) return;
+              btn.disabled = true;
+              const orig = btn.innerText;
+              btn.innerText = 'Sending...';
+              try {
+                const res = await fetch('/api/contact', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ name, email, message })
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                  btn.innerText = 'Message Sent';
+                  document.getElementById('contactForm').reset();
+                  setTimeout(() => { btn.innerText = orig; btn.disabled = false; }, 3000);
+                } else {
+                  btn.innerText = 'Send Message';
+                  btn.disabled = false;
+                  alert(data.message || 'Failed to send message.');
+                }
+              } catch (err) {
+                console.error(err);
+                btn.innerText = 'Send Message';
+                btn.disabled = false;
+                alert('Failed to send message. Please try again later.');
+              }
+            }}>Send Message</button>
           </form>
         </div>
       </div>

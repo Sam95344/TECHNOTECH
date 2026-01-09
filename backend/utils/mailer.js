@@ -21,4 +21,20 @@ const sendInternshipApplication = async ({ name, domain, resume }) => {
   await transporter.sendMail(mailOptions);
 };
 
-module.exports = { sendInternshipApplication };
+const sendContactMessage = async ({ name, email, message }) => {
+  const mailOptions = {
+    from: process.env.MAIL_USER,
+    to: 'careerstechnotech@gmail.com',
+    subject: `Website Contact: ${name} <${email}>`,
+    html: `<h3>New Contact Message</h3>
+      <p><b>Name:</b> ${name}</p>
+      <p><b>Email:</b> ${email}</p>
+      <p><b>Message:</b></p>
+      <p>${message.replace(/\n/g, '<br/>')}</p>
+      <hr/>
+      <p>This message was sent via the TechNotech website contact form.</p>`
+  };
+  await transporter.sendMail(mailOptions);
+};
+
+module.exports = { sendInternshipApplication, sendContactMessage };
