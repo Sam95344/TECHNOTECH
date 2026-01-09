@@ -22,6 +22,7 @@ const sendInternshipApplication = async ({ name, domain, resume }) => {
 };
 
 const sendContactMessage = async ({ name, email, message }) => {
+  console.log('Attempting to send contact email from:', process.env.MAIL_USER);
   const mailOptions = {
     from: process.env.MAIL_USER,
     to: 'careerstechnotech@gmail.com',
@@ -34,7 +35,8 @@ const sendContactMessage = async ({ name, email, message }) => {
       <hr/>
       <p>This message was sent via the TechNotech website contact form.</p>`
   };
-  await transporter.sendMail(mailOptions);
+  const result = await transporter.sendMail(mailOptions);
+  console.log('Email sent successfully:', result.messageId);
 };
 
 module.exports = { sendInternshipApplication, sendContactMessage };
