@@ -57,6 +57,7 @@ const PublicVerification = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          certificateNumber: genId,
           studentName: genName,
           course: genCourse,
           completionDate: genDate,
@@ -65,7 +66,8 @@ const PublicVerification = () => {
         }),
       });
       if (!response.ok) {
-        throw new Error('Failed to generate certificate');
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to generate certificate');
       }
       const certificate = await response.json();
       alert(`Certificate generated with number: ${certificate.certificateNumber}`);
@@ -75,7 +77,7 @@ const PublicVerification = () => {
       setGenCourse('');
       setGenDuration('');
     } catch (error) {
-      alert('Error generating certificate');
+      alert(`Error: ${error.message}`);
     }
   };
 

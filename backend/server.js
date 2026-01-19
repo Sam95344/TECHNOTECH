@@ -23,10 +23,12 @@ const certificateRoutes = require('./routes/certificateRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const internshipRoutes = require('./routes/internshipRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const contactRoutes = require('./routes/contactRoutes');
 app.use('/api/certificates', certificateRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/internships', internshipRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/contact', contactRoutes);
 
 app.get('/', (req, res) => {
   res.send('TechNotech Backend API');

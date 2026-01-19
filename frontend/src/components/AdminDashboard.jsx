@@ -6,6 +6,7 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   // Certificate state
   const [certificates, setCertificates] = useState([]);
   const [newCertificate, setNewCertificate] = useState({
+    certificateNumber: '',
     studentName: '',
     course: '',
     completionDate: '',
@@ -64,11 +65,11 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
   const handleGenerateCertificate = async (e) => {
     e.preventDefault();
     try {
-      const certificateNumber = 'CERT' + Date.now() + Math.random().toString(36).substr(2, 5).toUpperCase();
-      console.log('Generated certificate number:', certificateNumber);
+      const certificateNumber = newCertificate.certificateNumber || 'CERT' + Date.now() + Math.random().toString(36).substr(2, 5).toUpperCase();
+      console.log('Certificate number:', certificateNumber);
       console.log('Certificate data:', { ...newCertificate, issuedBy: 'TechNotech' });
       await saveCertificateByNumber(certificateNumber, { ...newCertificate, issuedBy: 'TechNotech' });
-      setNewCertificate({ studentName: '', course: '', completionDate: '', grade: '' });
+      setNewCertificate({ certificateNumber: '', studentName: '', course: '', completionDate: '', grade: '' });
       fetchCertificates();
     } catch (error) {
       console.error('Error generating certificate:', error);
@@ -198,7 +199,10 @@ const AdminDashboard = ({ setActiveSection, handleLogout }) => {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '40px' }}>
             <div style={{ flex: 1, minWidth: 260 }}>
               <form onSubmit={handleGenerateCertificate}>
-                {/* ...existing code for certificate form... */}
+                <div style={{ marginBottom: '15px' }}>
+                  <label style={{ display: 'block', marginBottom: '5px', color: 'var(--text-muted)' }}>Certificate Number (leave blank to auto-generate)</label>
+                  <input type="text" name="certificateNumber" value={newCertificate.certificateNumber} onChange={handleInputChange} style={{ width: '100%', padding: '10px', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', color: 'white' }} />
+                </div>
                 <div style={{ marginBottom: '15px' }}>
                   <label style={{ display: 'block', marginBottom: '5px', color: 'var(--text-muted)' }}>Student Name</label>
                   <input type="text" name="studentName" value={newCertificate.studentName} onChange={handleInputChange} required style={{ width: '100%', padding: '10px', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', color: 'white' }} />

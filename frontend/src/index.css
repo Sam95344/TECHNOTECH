@@ -594,11 +594,16 @@ footer::before {
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
     .intern-card { padding: 25px; }
     .contact-box { grid-template-columns: 1fr; }
+    .App { padding: 0 10px; }
+    .bg-glow { width: 300px; height: 300px; }
+    .bg-glow-1 { left: -50px; }
+    .bg-glow-2 { right: -50px; }
 }
 
 .App {
     min-height: 100vh;
     position: relative;
+    overflow-x: hidden;
 }
 
 /* --- Verification Page Styles --- */
